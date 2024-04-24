@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>CUSTOMERS</h1>
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>CUSTOMER ID</th>
+          <th>CUSTOMER NAME</th>
+          <th>ACCOUNT NUMBER</th>
+          <th>BALANCE</th>
+          <th>EMAIL</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let customerList of Customer">
+          <td>{{customerList.customerId}}</td>
+          <td>{{customerList.customerName}}</td>
+          <td>{{customerList.customerAccountNumber}}</td>
+          <td>{{customerList.customerBalance}}</td>
+          <td>{{customerList.customerEmail}}</td>
+          <td>
+            <button class="btn btn-outline-danger" (click)="onDelete()">Delete</button>
+          </td>
+          <td>
+            <button class="btn btn-outline-success">Update</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>ADD CUSTOMER</h2>
+      <hr>
+      <form (ngSubmit)="addCustomer()">
+        <div class="form-group">
+          <label for="customerId">CUSTOMER ID</label>
+          <input type="number" id="customerId" class="form-control mb-2" [(ngModel)]="newCustomer.customerId"
+                 #customerId="ngModel" (change)="log(customerId)" name="customerId" required>
+          <div class="text text-danger" *ngIf="customerId.touched && !customerId.valid">This field is required</div>
+
+
+          <label for="customerName">CUSTOMER NAME</label>
+          <input type="text" id="customerName" class="form-control mb-2" [(ngModel)]="newCustomer.customerName"
+                 #customerName="ngModel" name="customerName" (change)="log(customerName)" minlength="5" required>
+          <div class="text text-danger" *ngIf="customerName.touched && !customerName.valid">This field is required</div>
+
+          <label for="customerAccountNumber">ACCOUNT NUMBER</label>
+          <input type="number" id="customerAccountNumber" class="form-control mb-2"
+                 [(ngModel)]="newCustomer.customerAccountNumber" #customerAccountNumber="ngModel"
+                 (change)="log(customerAccountNumber)" name="customerAccountNumber" minlength="5" required>
+
+          <label for="accountBalance"> BALANCE</label>
+          <input type="number" id="accountBalance" class="form-control mb-2" [(ngModel)]="newCustomer.customerBalance"
+                 #customerBalance="ngModel" (change)="log(customerBalance)" name="accountBalance" minlength="2"
+                 required>
+
+          <label for="customerEmail">EMAIL</label>
+          <input type="email" id="customerEmail" class="form-control mb-2" [(ngModel)]="newCustomer.customerEmail"
+                 #customerEmail="ngModel" (change)="log(customerEmail)" name="customerEmail" minlength="5" required>
+
+        </div>
+        <button type="submit" class="btn btn-outline-primary col-sm-1">Submit</button>
+
+      </form>
+    </div>
+  </div>
+</div>
